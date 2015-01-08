@@ -1,0 +1,33 @@
+{
+  "name": "uniql",
+  "version": "0.0.1",
+  "description": "Produces ASTs from UniQL queries.",
+  "main": "src/parser.js",
+  "scripts": {
+    "test": "mocha tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/honeinc/uniql.git"
+  },
+  "keywords": [
+    "query",
+    "ast",
+    "dsl"
+  ],
+  "author": "Andy Burke <aburke@bitflood.org>",
+  "contributors": [ {
+    "name": "Abraham Haskins",
+    "email": "abe@rigidflame.com"
+  } ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/honeinc/uniql/issues"
+  },
+  "devDependencies": {
+    "mocha": "~2.0.1"
+  },
+  "dependencies": {
+    "jison": "^0.4.15"
+  }
+}
