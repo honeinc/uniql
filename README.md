@@ -46,6 +46,7 @@ Using that AST, you can generate queries for various datastores.
 
 - [MongoDB](https://github.com/honeinc/uniql-mongodb)
 - [ElasticSearch](https://github.com/honeinc/uniql-es)
+- [JavaScript](https://github.com/honeinc/uniql-js)
 
 # Syntax
 
