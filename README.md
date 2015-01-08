@@ -40,7 +40,9 @@ Produces the following AST:
           { type: 'STRING', arguments: [ 'o.+' ] } ] } ] }
 ```
 
-Using that AST, you can generate queries. Here's a list of the available compilers:
+Using that AST, you can generate queries for various datastores.
+
+# Available Compilers
 
 - [MongoDB](https://github.com/honeinc/uniql-mongodb)
 
@@ -70,4 +72,4 @@ Operator precedence follows that of any sane language.
 
 # Credits
 
-This was inspired by [FiltrES](https://rawgit.com/abeisgreat/filtres) which was in turn inspired by [Filtrex](https://github.com/joewalnes/filtrex)
+This was inspired by [FiltrES](https://github.com/abeisgreat/filtres) which was in turn inspired by [Filtrex](https://github.com/joewalnes/filtrex)
