@@ -1,4 +1,4 @@
-UniQL
+UniQL (UNIversal Query Language)
 =======
 
 Parses a simple query langauge into an AST that can then be used to compile a query for various datastores.
