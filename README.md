@@ -45,6 +45,7 @@ Using that AST, you can generate queries for various datastores.
 # Available Compilers
 
 - [MongoDB](https://github.com/honeinc/uniql-mongodb)
+- [ElasticSearch](https://github.com/honeinc/uniql-es)
 
 # Syntax
 
