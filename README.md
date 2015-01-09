@@ -72,6 +72,16 @@ Using that AST, you can generate queries for various datastores.
 
 Operator precedence follows that of any sane language.
 
+# Help and Feedback Wanted
+
+This is an early pass at this. We're very open to getting pull requests to help us improve.
+
+Things we'd love to get to, but would also welcome PRs for:
+
+- Maybe specifying the grammar using [PEG](http://pegjs.org/) would be cleaner/clearer
+- Improvements/expansions to the query syntax
+- Certain edge case support for things like unary not in the MongoDB driver
+
 # Credits
 
 This was inspired by [FiltrES](https://github.com/abeisgreat/filtres) which was in turn inspired by [Filtrex](https://github.com/joewalnes/filtrex)
