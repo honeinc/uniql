@@ -24,7 +24,7 @@ var grammar = {
             [ 'in[^\\w]', 'return "in";' ],
 
             [ '[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";' ], // 212.321
-            [ '[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";' ], // some.Symbol22
+            [ '[a-zA-Z_][\\.a-zA-Z0-9_]*', 'return "SYMBOL";' ], // some.Symbol22
             [ '"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";' ], // "foo"
 
             // End
