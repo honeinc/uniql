@@ -1,15 +1,66 @@
 UniQL (UNIversal Query Language)
 =======
 
-Parses a simple query langauge into an AST that can then be used to compile a query for various datastores.
+Lets you write a simple query and run it against any datastore, [ElasticSearch](https://github.com/honeinc/uniql-es)
+and/or [MongoDB](https://github.com/honeinc/uniql-mongodb).
+
+UniQL parses a simple query langauge into an Abstract Syntax Tree that can then be used to compile a query for a given
+datastore. This is useful if you want a level of abstraction between your queries and how your data is actually
+stored/searched. You can also use UniQL to execute the same query against multiple datastores at the same time.
 
 For example:
+
+```
+var parse = require( 'uniql' );
+var mongoCompile = require( 'uniql-mongodb' );
+var esCompile = require( 'uniql-es' );
+
+// parse a uniql query into an AST
+var ast = parse( '( height <= 20 or ( favorites.color == "green" and height != 25 ) ) and firstname ~= "o.+"' );
+
+// using that AST, compile a mongodb query
+var mongoQuery = mongoCompile( ast );
+console.log( util.inspect( mongoQuery, { depth: null } ) );
+
+// using the same AST, compile an elasticsearch query
+var esQuery = esCompile( es );
+console.log( util.inspect( esQuery, { depth: null } ) );
+```
+
+For MongoDB, the query generated is:
+
+```
+{ '$or': 
+   [ { height: { '$lte': 20 } },
+     { 'favorites.color': 'green', height: { '$ne': 25 } } ],
+  firstname: { '$regex': 'o.+' } }
+```
+
+For ElasticSearch, the same query is:
+
+```
+{ query: 
+   { filtered: 
+      { filter: 
+         [ { bool: 
+              { must: 
+                 [ { bool: 
+                      { should: 
+                         [ { range: { height: { lte: 20 } } },
+                           { bool: 
+                              { must: 
+                                 [ { term: { 'favorites.color': 'green' } },
+                                   { bool: { must_not: { term: { height: 25 } } } } ] } } ] } },
+                   { bool: { must: { regexp: { firstname: 'o.+' } } } } ] } } ] } } }
+```
+
+All generated from one simple query:
 
 ````
 ( height <= 20 or ( favorites.color == "green" and height != 25 ) ) and firstname ~= "o.+"
 ````
 
-Produces the following AST:
+Which produces the following AST:
 
 ```
 { type: '&&',
@@ -47,8 +98,9 @@ Using that AST, you can generate queries for various datastores.
 - [MongoDB](https://github.com/honeinc/uniql-mongodb)
 - [ElasticSearch](https://github.com/honeinc/uniql-es)
 - [JavaScript](https://github.com/honeinc/uniql-js)
+- !! Your compiler here! Submissions welcome! !!
 
-# Syntax
+# UniQL Query Syntax
 
 | Values     | Description                                                               |
 | ---------- | ------------------------------------------------------------------------- |
