@@ -1,7 +1,7 @@
 UniQL (UNIversal Query Language)
 =======
 
-Lets you write a simple query and run it against any datastore, [ElasticSearch](https://github.com/honeinc/uniql-es)
+Lets you write a simple query and run it against any datastore, like [ElasticSearch](https://github.com/honeinc/uniql-es)
 and/or [MongoDB](https://github.com/honeinc/uniql-mongodb).
 
 UniQL parses a simple query langauge into an Abstract Syntax Tree that can then be used to compile a query for a given
