@@ -1,6 +1,6 @@
 {
   "name": "uniql",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Produces ASTs from UniQL queries.",
   "main": "src/parser.js",
   "scripts": {

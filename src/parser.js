@@ -24,6 +24,8 @@ var grammar = {
             [ 'in[^\\w]', 'return "in";' ],
 
             [ '[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";' ], // 212.321
+            [ 'true|false', 'return "BOOLEAN";' ], // true/false
+            [ 'null|undefined', 'return "PRIMITIVE";' ],
             [ '[a-zA-Z_][\\.a-zA-Z0-9_]*', 'return "SYMBOL";' ], // some.Symbol22
             [ '"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";' ], // "foo"
 
@@ -67,6 +69,8 @@ var grammar = {
 
             // Literals
             [ 'NUMBER'     , '$$ = { type: "NUMBER", arguments: [ $1 ] };' ],
+            [ 'BOOLEAN'    , '$$ = { type: "BOOLEAN", arguments: [ $1 ] };' ],
+            [ 'PRIMITIVE'  , '$$ = { type: "PRIMITIVE", arguments: [ $1 ] };' ],
             [ 'STRING'     , '$$ = { type: "STRING", arguments: [ $1 ] };' ],
             [ 'SYMBOL'     , '$$ = { type: "SYMBOL", arguments: [ $1 ] };' ]
         ]

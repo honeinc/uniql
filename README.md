@@ -102,11 +102,13 @@ Using that AST, you can generate queries for various datastores.
 
 # UniQL Query Syntax
 
-| Values     | Description                                                               |
-| ---------- | ------------------------------------------------------------------------- |
-| 43, -1.234 | Numbers                                                                   |
-| "hello"    | Strings                                                                   |
-| foo, a.b.c | Symbols (usually a key or column name in your datastore)                  |
+| Values          | Description                                                               |
+| --------------- | ------------------------------------------------------------------------- |
+| 43, -1.234      | Numbers                                                                   |
+| true, false     | Booleans                                                                  |
+| null, undefined | Primitives                                                                |
+| "hello"         | Strings                                                                   |
+| foo, a.b.c      | Symbols (usually a key or column name in your datastore)                  |
 
 | Operators   | Description                                                              |
 | ----------- | ------------------------------------------------------------------------ |
