@@ -10,7 +10,7 @@ stored/searched. You can also use UniQL to execute the same query against multip
 
 For example:
 
-```
+```javascript
 var parse = require( 'uniql' );
 var mongoCompile = require( 'uniql-mongodb' );
 var esCompile = require( 'uniql-es' );
@@ -29,8 +29,8 @@ console.log( util.inspect( esQuery, { depth: null } ) );
 
 For MongoDB, the query generated is:
 
-```
-{ '$or': 
+```javascript
+{ '$or':
    [ { height: { '$lte': 20 } },
      { 'favorites.color': 'green', height: { '$ne': 25 } } ],
   firstname: { '$regex': 'o.+' } }
@@ -38,17 +38,17 @@ For MongoDB, the query generated is:
 
 For ElasticSearch, the same query is:
 
-```
-{ query: 
-   { filtered: 
-      { filter: 
-         [ { bool: 
-              { must: 
-                 [ { bool: 
-                      { should: 
+```javascript
+{ query:
+   { filtered:
+      { filter:
+         [ { bool:
+              { must:
+                 [ { bool:
+                      { should:
                          [ { range: { height: { lte: 20 } } },
-                           { bool: 
-                              { must: 
+                           { bool:
+                              { must:
                                  [ { term: { 'favorites.color': 'green' } },
                                    { bool: { must_not: { term: { height: 25 } } } } ] } } ] } },
                    { bool: { must: { regexp: { firstname: 'o.+' } } } } ] } } ] } } }
@@ -56,37 +56,37 @@ For ElasticSearch, the same query is:
 
 All generated from one simple query:
 
-````
+````javascript
 ( height <= 20 or ( favorites.color == "green" and height != 25 ) ) and firstname ~= "o.+"
 ````
 
 Which produces the following AST:
 
-```
+```javascript
 { type: '&&',
-  arguments: 
+  arguments:
    [ { type: 'EXPRESSION',
-       arguments: 
+       arguments:
         [ { type: '||',
-            arguments: 
+            arguments:
              [ { type: '<=',
-                 arguments: 
+                 arguments:
                   [ { type: 'SYMBOL', arguments: [ 'height' ] },
                     { type: 'NUMBER', arguments: [ '20' ] } ] },
                { type: 'EXPRESSION',
-                 arguments: 
+                 arguments:
                   [ { type: '&&',
-                      arguments: 
+                      arguments:
                        [ { type: '==',
-                           arguments: 
+                           arguments:
                             [ { type: 'SYMBOL', arguments: [ 'favorites.color' ] },
                               { type: 'STRING', arguments: [ 'green' ] } ] },
                          { type: '!=',
-                           arguments: 
+                           arguments:
                             [ { type: 'SYMBOL', arguments: [ 'height' ] },
                               { type: 'NUMBER', arguments: [ '25' ] } ] } ] } ] } ] } ] },
      { type: 'MATCH',
-       arguments: 
+       arguments:
         [ { type: 'SYMBOL', arguments: [ 'firstname' ] },
           { type: 'STRING', arguments: [ 'o.+' ] } ] } ] }
 ```
